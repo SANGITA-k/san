@@ -1,70 +1,126 @@
-# Getting Started with Create React App
+# Brain Tumor Detection (End-to-End)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+This project is a **Flask web application** for detecting brain tumors from MRI images using a deep learning model built with **PyTorch**. Users can upload MRI images through the app, and the model will classify them as either tumor or non-tumor. The goal of this project is to provide an intuitive interface for medical professionals to quickly identify potential brain tumors.
 
-In the project directory, you can run:
+### Dataset:
+- The dataset contains MRI images, divided into two categories: **tumor** and **non-tumor**.
+- Preprocessing techniques are applied to the dataset to ensure optimal model performance.
 
-### `npm start`
+## Project Overview
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+This end-to-end project consists of:
+1. **Data Loading**: Load MRI images for training, validation, and testing.
+2. **Data Preprocessing**: Apply normalization, resizing, and augmentation techniques.
+3. **Model Building**: Build a Convolutional Neural Network (CNN) using **PyTorch** to classify the MRI images.
+4. **Model Training**: Train the model on GPU (if available) to detect brain tumors.
+5. **Flask Web Application**: Develop a Flask app for user interaction, allowing image uploads for tumor detection.
+6. **Model Deployment**: Deploy the trained model within the Flask app.
+7. **Prediction**: Provide real-time predictions through the Flask web app.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Model Download and Directory Structure
 
-### `npm test`
+### Pretrained Model:
+You can download the pretrained model from the following link:
+[Brain Tumor Detection Model](https://drive.google.com/file/d/1LJG_ITCWWtriLC5NPrWxIDwekWbhU_Rj/view?usp=sharing)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Directory Structure:
+```
+Brain-Tumor-Detection/
+│
+├── app/
+│   ├── static/                 # CSS, JS, and images for the Flask web app
+│   ├── templates/              # HTML templates for the Flask app
+│   └── app.py                  # Main Flask application
+│
+├── model/
+│   └── brain_tumor_model.pth   # Pretrained PyTorch model
+│
+├── data/
+│   ├── train/                  # Training MRI images
+│   ├── test/                   # Testing MRI images
+│
+├── src/
+│   ├── dataset.py              # Script to load and preprocess the dataset
+│   ├── model.py                # CNN model architecture using PyTorch
+│   └── train.py                # Script to train the model
+│
+├── README.md                   # Project documentation
+└── requirements.txt            # List of required Python packages
+```
 
-### `npm run build`
+## Setup Instructions
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Step 1: Create a Virtual Environment
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+Create a virtual environment to isolate the dependencies for this project.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```bash
+# For Windows
+python -m venv venv
+venv\Scripts\activate
 
-### `npm run eject`
+# For macOS/Linux
+python3 -m venv venv
+source venv/bin/activate
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Step 2: Install Required Libraries
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Install the dependencies listed in `requirements.txt`:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+pip install -r requirements.txt
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Step 3: Download the Pretrained Model
 
-## Learn More
+Download the pretrained model from [this link](https://drive.google.com/file/d/1LJG_ITCWWtriLC5NPrWxIDwekWbhU_Rj/view?usp=sharing) and place it in the `model/` directory as `brain_tumor_model.pth`.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### Step 4: Running the Flask App
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+To start the Flask web app, navigate to the `app/` directory and run the `app.py` file:
 
-### Code Splitting
+```bash
+cd app/
+python app.py
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+The app will be hosted at `http://127.0.0.1:5000/`. You can open the URL in your browser and upload MRI images to receive predictions.
 
-### Analyzing the Bundle Size
+## Flask Web Application Features
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+- **Image Upload**: Users can upload MRI images through the web interface.
+- **Tumor Detection**: The uploaded image is fed into the model to predict whether a tumor is present.
+- **Result Display**: The result is displayed on the same page with either a "Tumor" or "Non-Tumor" label.
 
-### Making a Progressive Web App
+## Model Architecture
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The model used in this project is a **Convolutional Neural Network (CNN)** built using **PyTorch**. The architecture has been optimized for image classification tasks and consists of several layers:
 
-### Advanced Configuration
+### Key Layers:
+- **Convolutional Layers**: For feature extraction from MRI images.
+- **Max Pooling Layers**: For downsampling and reducing spatial dimensions.
+- **Fully Connected Layers**: For classification.
+- **Softmax Activation**: To produce the output probability of each class (Tumor/Non-Tumor).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## Data Preprocessing
 
-### Deployment
+To ensure the CNN model performs optimally, the following preprocessing steps are applied:
+- **Grayscale Conversion**: All MRI images are converted to grayscale.
+- **Resizing**: Images are resized to 64x64 pixels for uniformity.
+- **Normalization**: Each pixel value is normalized to a range of [0, 1].
+- **Data Augmentation**: Techniques like random rotation, flipping, and zooming are applied to expand the dataset and prevent overfitting.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Conclusion
 
-### `npm run build` fails to minify
+This Flask web app provides an end-to-end solution for detecting brain tumors using MRI images. With a simple user interface and a powerful backend, it can serve as a diagnostic tool for medical professionals. The project can be further enhanced by incorporating additional data, improving model accuracy, or deploying the app to a cloud platform like Heroku.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Future Enhancements
+
+- **Integration with Cloud Platforms**: Deploy the app on Heroku or AWS for wider accessibility.
+- **Mobile Application**: Develop a mobile app to upload MRI images and get predictions on the go.
+- **Transfer Learning**: Incorporate pre-trained models like ResNet to further improve accuracy.
+
+---
